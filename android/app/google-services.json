@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "519833620836",
+    "firebase_url": "https://testing-3b97c-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "testing-3b97c",
+    "storage_bucket": "testing-3b97c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519833620836:android:dd59c8feb4d4d640dfea71",
+        "android_client_info": {
+          "package_name": "com.example.infinix"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVba8kxZaDwAvhmApPZiVvTb-IBah2-ms"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519833620836:android:91fb0b50031f691fdfea71",
+        "android_client_info": {
+          "package_name": "com.example.paa_modul6"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVba8kxZaDwAvhmApPZiVvTb-IBah2-ms"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

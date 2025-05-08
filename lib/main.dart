@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:paa_modul6/bangun_viewdetail.dart';
+import 'package:paa_modul6/screens/bangun_viewdetail.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'screens/bangun_splash.dart';
+import 'screens/bangun_anggaran.dart';
+import 'screens/bangun_cetak.dart';
+import 'screens/bangun_toko.dart';
+import 'screens/bangun_detail_project.dart';
+import 'screens/bangun_profile.dart';
+import 'package:device_preview/device_preview.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(DevicePreview(
+    enabled: true,
+    builder: (context) => const MyApp(),));
+
 }
 
 class MyApp extends StatefulWidget {
@@ -15,9 +29,19 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomePage(),
+    return MaterialApp(
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const BangunSplash(),
+        '/home': (context) => const HomePage(),
+        '/anggaran': (context) => BangunAnggaran(),
+        '/cetak': (context) => const BangunCetak(),
+        '/toko': (context) => BangunToko(),
+        '/profile': (context) => const BangunProfile(),
+      },
     );
   }
 }
