@@ -1,7 +1,55 @@
 import 'package:flutter/material.dart';
+import 'bangun_viewdetail.dart';
 
-class BangunAnggaran extends StatelessWidget {
-  BangunAnggaran({super.key});
+class BangunAnggaran extends StatefulWidget {
+  const BangunAnggaran({super.key});
+
+  @override
+  State<BangunAnggaran> createState() => _BangunAnggaranState();
+}
+
+class _BangunAnggaranState extends State<BangunAnggaran> {
+  List<Map<String, dynamic>> listProjectBerjalan = [
+    {
+      'title': 'Project Pembangunan Apartement Ohio',
+      'items': [
+        {'no': 1, 'name': 'Semen', 'qty': 10, 'price': 50000},
+        {'no': 2, 'name': 'Batu Bata', 'qty': 100, 'price': 1000},
+      ],
+    },
+    {'title': 'Project Pembangunan IKN', 'items': []},
+  ];
+
+  List<Map<String, dynamic>> listProjectSelesai = [
+    {
+      'title': 'Project Pembangunan Apartement Ohio',
+      'items': [
+        {'no': 1, 'name': 'Cat Tembok', 'qty': 5, 'price': 150000},
+      ],
+    },
+  ];
+
+  void _addNewProject() {
+    setState(() {
+      listProjectBerjalan.add({
+        'title': 'Project Baru ${listProjectBerjalan.length + 1}',
+        'items': [],
+      });
+    });
+  }
+
+  void _openDetail(Map<String, dynamic> project) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder:
+            (_) => BudgetDetailPage(
+              title: project['title'],
+              items: project['items'],
+            ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -9,35 +57,50 @@ class BangunAnggaran extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
+          color: Colors.white,
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text('Manajemen Anggaran'),
-        backgroundColor: const Color.fromARGB(255, 216, 200, 58),
+        title: const Text(
+          'Manajemen Anggaran',
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'Montserrat',
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.amber[800],
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add, color: Colors.white),
+            onPressed: _addNewProject,
+          ),
+        ],
       ),
       body: ListView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         children: [
-          Text(
-            "Project berjalan",
+          const Text(
+            "Project Berjalan",
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 8),
-          buildProjectCard("200 Project", listProjectBerjalan),
-          SizedBox(height: 16),
-          Text(
+          const SizedBox(height: 8),
+          buildProjectCard(listProjectBerjalan),
+          const SizedBox(height: 16),
+          const Text(
             "Project Selesai",
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 8),
-          buildProjectCard("100 Project", listProjectSelesai),
+          const SizedBox(height: 8),
+          buildProjectCard(listProjectSelesai),
         ],
       ),
     );
   }
 
-  Widget buildProjectCard(String title, List<String> projectList) {
+  Widget buildProjectCard(List<Map<String, dynamic>> projectList) {
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.amber[800],
         borderRadius: BorderRadius.circular(12),
@@ -45,38 +108,20 @@ class BangunAnggaran extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              color: Colors.white,
-            ),
-          ),
           ...projectList.map(
             (project) => ListTile(
               dense: true,
-              title: Text(project, style: TextStyle(color: Colors.white)),
-              trailing: Icon(Icons.chevron_right, color: Colors.white),
+              title: Text(
+                project['title'],
+                style: const TextStyle(color: Colors.white),
+              ),
+              trailing: const Icon(Icons.chevron_right, color: Colors.white),
               contentPadding: EdgeInsets.zero,
+              onTap: () => _openDetail(project),
             ),
           ),
         ],
       ),
     );
   }
-
-  final listProjectBerjalan = [
-    "Project Pembangunan Apartement Ohio",
-    "Project Pembangunan IKN",
-    "Project Pembangunan Hotel Amerika",
-    "Project Pembangunan Apartement Ohio",
-    "Project Pembangunan 5",
-    "Project Pembangunan Hotel 6",
-    "Project Pembangunan Apartement 7",
-  ];
-
-  final listProjectSelesai = [
-    "Project Pembangunan Apartement Ohio",
-  ]; // Sama seperti di atas
 }

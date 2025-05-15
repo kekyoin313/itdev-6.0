@@ -46,11 +46,19 @@ class _BangunTokoState extends State<BangunToko> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text('Temukan Toko'),
-        backgroundColor: const Color.fromARGB(255, 216, 200, 58),
+        title: Text(
+          'Temukan Toko',
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'Montserrat',
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.amber[800],
       ),
       body: Padding(
         padding: EdgeInsets.all(16),

@@ -1,30 +1,85 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 
-class BangunSplash extends StatefulWidget {
+class BangunSplash extends StatelessWidget {
   const BangunSplash({super.key});
-
-  @override
-  State<BangunSplash> createState() => _BangunSplashState();
-}
-
-class _BangunSplashState extends State<BangunSplash> {
-  @override
-  void initState() {
-    super.initState();
-    Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, '/home');
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Image.asset('asset/image 13.png')],
-        ),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset(
+            'asset/image 13.png', // Pastikan nama file dan path benar
+            fit: BoxFit.cover,
+          ),
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.black.withOpacity(0.2),
+                  Colors.black.withOpacity(0.6),
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const Text(
+                  'Your\nbuilding data,\nyour winning\nformula!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 28,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Montserrat',
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  'Know the cost, own the gain!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white70,
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/home');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.teal[700],
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 40,
+                      vertical: 12,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text(
+                    'Get Started',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -1,22 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:paa_modul6/screens/bangun_viewdetail.dart';
+import 'package:paa_modul6/screens/bangun_detail.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'screens/bangun_splash.dart';
-import 'screens/bangun_anggaran.dart';
-import 'screens/bangun_cetak.dart';
-import 'screens/bangun_toko.dart';
-import 'screens/bangun_detail_project.dart';
-import 'screens/bangun_profile.dart';
+import 'screens/screens.dart';
 import 'package:device_preview/device_preview.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(DevicePreview(
-    enabled: true,
-    builder: (context) => const MyApp(),));
-
+  runApp(DevicePreview(enabled: true, builder: (context) => const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -41,6 +33,8 @@ class _MyAppState extends State<MyApp> {
         '/cetak': (context) => const BangunCetak(),
         '/toko': (context) => BangunToko(),
         '/profile': (context) => const BangunProfile(),
+        '/register': (context) => const BangunRegister(),
+        '/login': (context) => const BangunLogin(),
       },
     );
   }

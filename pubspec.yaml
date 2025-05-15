@@ -65,7 +65,13 @@ flutter:
     - family: RobotoCondensed
       fonts:
         - asset: asset/fonts/RobotoCondensed-Italic-VariableFont_wght.ttf
+          style: italic
         - asset: asset/fonts/RobotoCondensed-VariableFont_wght.ttf
+    - family: Montserrat
+      fonts:
+        - asset: asset/fonts/Montserrat-VariableFont_wght.ttf
+        - asset: asset/fonts/Montserrat-Italic-VariableFont_wght.ttf
+          style: italic
 
   # To add assets to your application, add an assets section, like this:
   # assets:
