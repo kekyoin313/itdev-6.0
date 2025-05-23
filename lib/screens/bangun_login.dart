@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paa_modul6/controllers/auth_service.dart';
 
 class BangunLogin extends StatefulWidget {
   const BangunLogin({super.key});
@@ -9,28 +10,26 @@ class BangunLogin extends StatefulWidget {
 
 class _BangunLoginState extends State<BangunLogin> {
   bool _obscureText = true;
-  final TextEditingController emailController = TextEditingController(
-    text: "alifaulia@gmail.com",
-  );
+  final TextEditingController nameController = TextEditingController(text: "");
   final TextEditingController passwordController = TextEditingController(
-    text: "password123",
+    text: "",
   );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFCFAF1),
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xFFF5D869),
+        backgroundColor: Colors.amber[800],
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black87),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
         centerTitle: true,
         title: const Text(
           "Temukan Toko Sekitar",
           style: TextStyle(
-            color: Colors.black87,
+            color: Colors.white,
             fontWeight: FontWeight.w600,
             fontFamily: 'Montserrat',
           ),
@@ -63,9 +62,9 @@ class _BangunLoginState extends State<BangunLogin> {
             ),
             const SizedBox(height: 30),
             TextField(
-              controller: emailController,
+              controller: nameController,
               decoration: InputDecoration(
-                hintText: 'Email',
+                hintText: 'Name',
                 filled: true,
                 fillColor: Colors.grey[200],
                 contentPadding: const EdgeInsets.symmetric(
@@ -113,8 +112,30 @@ class _BangunLoginState extends State<BangunLogin> {
             Align(alignment: Alignment.centerRight),
             const SizedBox(height: 18),
             ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/home');
+              onPressed: () async {
+                final name = nameController.text;
+                final password = passwordController.text;
+
+                final success = await AuthService().login(name, password);
+
+                if (success) {
+                  Navigator.pushNamed(context, '/home');
+                } else {
+                  showDialog(
+                    context: context,
+                    builder:
+                        (context) => AlertDialog(
+                          title: const Text('Login Gagal'),
+                          content: const Text('Email atau password salah.'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF116F62),

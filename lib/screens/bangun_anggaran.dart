@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'bangun_viewdetail.dart';
+import 'bangun_detailanggaran.dart';
 
 class BangunAnggaran extends StatefulWidget {
   const BangunAnggaran({super.key});
