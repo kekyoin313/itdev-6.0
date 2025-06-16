@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:paa_modul6/screens/bangun_tambahanggaran.dart';
 import 'firebase_options.dart';
 import 'screens/screens.dart';
+import 'screens/admin/bangun_admin_homescreen.dart';
 import 'package:device_preview/device_preview.dart';
 
 void main() async {
@@ -34,6 +36,9 @@ class _MyAppState extends State<MyApp> {
         '/profile': (context) => const BangunProfile(),
         '/register': (context) => const BangunRegister(),
         '/login': (context) => const BangunLogin(),
+        '/tambahanggaran': (context) => BangunTambahanggaran(),
+        '/detailAnggaran': (context) => BudgetDetailPage(title: '', items: []),
+        '/homeadmin': (context) => HomePageAdmin(),
       },
     );
   }

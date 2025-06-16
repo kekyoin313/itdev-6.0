@@ -6,3 +6,6 @@ export 'bangun_toko.dart';
 export 'bangun_splash.dart';
 export 'bangun_homescreen.dart';
 export 'bangun_register.dart';
+export 'bangun_detailanggaran.dart';
+export 'bangun_tambahanggaran.dart';
+export 'bangun_user_list.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paa_modul6/controllers/user_service.dart';
+import 'package:paa_modul6/services/user_service.dart';
 import 'package:paa_modul6/models/user.dart';
 
 class UserListScreen extends StatefulWidget {

@@ -77,6 +77,12 @@ class _BangunAnggaranState extends State<BangunAnggaran> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () async {
+          Navigator.pushNamed(context, '/tambahanggaran');
+        },
+      ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [

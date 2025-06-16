@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:paa_modul6/controllers/auth_service.dart';
+import 'package:paa_modul6/services/auth_service.dart';
+import 'package:paa_modul6/controllers/login_controller.dart';
 
 class BangunLogin extends StatefulWidget {
   const BangunLogin({super.key});
@@ -76,7 +77,6 @@ class _BangunLoginState extends State<BangunLogin> {
                   borderSide: BorderSide.none,
                 ),
               ),
-              keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(height: 16),
             TextField(
@@ -113,29 +113,19 @@ class _BangunLoginState extends State<BangunLogin> {
             const SizedBox(height: 18),
             ElevatedButton(
               onPressed: () async {
-                final name = nameController.text;
+                final name = nameController.text.trim();
                 final password = passwordController.text;
 
-                final success = await AuthService().login(name, password);
+                final errorMessage = await LoginController().loginUser(name, password, context);
 
-                if (success) {
+                if (errorMessage == null) {
                   Navigator.pushNamed(context, '/home');
                 } else {
-                  showDialog(
-                    context: context,
-                    builder:
-                        (context) => AlertDialog(
-                          title: const Text('Login Gagal'),
-                          content: const Text('Email atau password salah.'),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(context),
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        ),
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(errorMessage)),
                   );
                 }
+                
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF116F62),
